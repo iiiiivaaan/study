@@ -1,0 +1,285 @@
+Script started on Thu 10 Feb 2022 02:27:05 PM UTC
+]0;root@lvm:/home/vagrant[?1034h[root@lvm vagrant]# yum install xfsdump
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.sale-dedic.com
+ * extras: mirror.corbina.net
+ * updates: mirror.corbina.net
+Resolving Dependencies
+--> Running transaction check
+---> Package xfsdump.x86_64 0:3.1.7-1.el7 will be installed
+--> Processing Dependency: attr >= 2.0.0 for package: xfsdump-3.1.7-1.el7.x86_64
+--> Running transaction check
+---> Package attr.x86_64 0:2.4.46-13.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===================================================================================================================================================================================================================
+ Package                                           Arch                                             Version                                                   Repository                                      Size
+===================================================================================================================================================================================================================
+Installing:
+ xfsdump                                           x86_64                                           3.1.7-1.el7                                               base                                           308 k
+Installing for dependencies:
+ attr                                              x86_64                                           2.4.46-13.el7                                             base                                            66 k
+
+Transaction Summary
+===================================================================================================================================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 374 k
+Installed size: 1.1 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/2): attr-2.4.46-13.el7.x86_64.rpm                                                                                                                                                        |  66 kB  00:00:00     
+(2/2): xfsdump-3.1.7-1.el7.x86_64.rpm                                                                                                                                                       | 308 kB  00:00:00     
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                              1.1 MB/s | 374 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : attr-2.4.46-13.el7.x86_64 [                                                                                                                                                                   ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########                                                                                                                                                          ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#############################                                                                                                                                      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [############################################                                                                                                                       ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [################################################                                                                                                                   ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#################################################################                                                                                                  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [####################################################################                                                                                               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [######################################################################                                                                                             ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#################################################################################                                                                                  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [######################################################################################                                                                             ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [######################################################################################################                                                             ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########################################################################################################                                                           ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################################################################                                                          ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#############################################################################################################                                                      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###################################################################################################################                                                ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########################################################################################################################                                           ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#############################################################################################################################                                      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [####################################################################################################################################                               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########################################################################################################################################                           ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#############################################################################################################################################                      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [####################################################################################################################################################               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################################################################################################################          ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [############################################################################################################################################################       ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##############################################################################################################################################################     ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###############################################################################################################################################################    ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#################################################################################################################################################################  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64                                                                                                                                                                       1/2 
+  Installing : xfsdump-3.1.7-1.el7.x86_64 [                                                                                                                                                                  ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#########                                                                                                                                                         ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#####################                                                                                                                                             ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [################################                                                                                                                                  ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [##########################################                                                                                                                        ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [################################################                                                                                                                  ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [###########################################################                                                                                                       ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################################################################                                                                                           ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#################################################################################                                                                                 ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [############################################################################################                                                                      ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################################################################################################                                                           ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#################################################################################################################                                                 ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################################################################################################################                                           ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [############################################################################################################################                                      ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [###############################################################################################################################                                   ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#################################################################################################################################                                 ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [###########################################################################################################################################                       ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [################################################################################################################################################                  ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#########################################################################################################################################################         ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [#############################################################################################################################################################     ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [##############################################################################################################################################################    ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64 [################################################################################################################################################################  ] 2/2  Installing : xfsdump-3.1.7-1.el7.x86_64                                                                                                                                                                      2/2 
+  Verifying  : attr-2.4.46-13.el7.x86_64                                                                                                                                                                       1/2 
+  Verifying  : xfsdump-3.1.7-1.el7.x86_64                                                                                                                                                                      2/2 
+
+Installed:
+  xfsdump.x86_64 0:3.1.7-1.el7                                                                                                                                                                                     
+
+Dependency Installed:
+  attr.x86_64 0:2.4.46-13.el7                                                                                                                                                                                      
+
+Complete!
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# df h[K-h
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00   38G  881M   37G   3% /
+devtmpfs                         109M     0  109M   0% /dev
+tmpfs                            118M     0  118M   0% /dev/shm
+tmpfs                            118M  4.5M  114M   4% /run
+tmpfs                            118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                       1014M   63M  952M   7% /boot
+tmpfs                             24M     0   24M   0% /run/user/1000
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# fdisk -l
+
+Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000b47f7
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1            2048        4095        1024   83  Linux
+/dev/sda2   *        4096     2101247     1048576   83  Linux
+/dev/sda3         2101248    83886079    40892416   8e  Linux LVM
+
+Disk /dev/sdb: 10.7 GB, 10737418240 bytes, 20971520 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdc: 2147 MB, 2147483648 bytes, 4194304 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdd: 1073 MB, 1073741824 bytes, 2097152 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sde: 1073 MB, 1073741824 bytes, 2097152 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/VolGroup00-LogVol00: 40.2 GB, 40231763968 bytes, 78577664 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/VolGroup00-LogVol01: 1610 MB, 1610612736 bytes, 3145728 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# bk[Klkid 
+/dev/sda2: UUID="570897ca-e759-4c81-90cf-389da6eee4cc" TYPE="xfs" 
+/dev/sda3: UUID="vrrtbx-g480-HcJI-5wLn-4aOf-Olld-rC03AY" TYPE="LVM2_member" 
+/dev/mapper/VolGroup00-LogVol00: UUID="b60e9498-0baa-4d9f-90aa-069048217fee" TYPE="xfs" 
+/dev/mapper/VolGroup00-LogVol01: UUID="c39c5bed-f37c-4263-bee8-aeb6a6659d7b" TYPE="swap" 
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# ls /dev/sb[Kd
+sda   sda1  sda2  sda3  sdb   sdc   sdd   sde   
+[root@lvm vagrant]# ls /dev/sdb [K[K[K[K[K[K[K[K[K[K[K[Kpvcreate /dev/sdb
+  Physical volume "/dev/sdb" successfully created.
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  vgcreate vg_root /dev/sdb
+  Volume group "vg_root" successfully created
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# lvcreate -n lv_root -l +100%FREE /dev/vg_root
+  Logical volume "lv_root" created.
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  mkfs.xfs /dev/vg_root/lv_root
+meta-data=/dev/vg_root/lv_root   isize=512    agcount=4, agsize=655104 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2620416, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  mount /dev/vg_root/lv_root /mnt
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# mount -[K| column -t
+sysfs                            on  /sys                             type  sysfs       (rw,nosuid,nodev,noexec,relatime,seclabel)
+proc                             on  /proc                            type  proc        (rw,nosuid,nodev,noexec,relatime)
+devtmpfs                         on  /dev                             type  devtmpfs    (rw,nosuid,seclabel,size=110948k,nr_inodes=27737,mode=755)
+securityfs                       on  /sys/kernel/security             type  securityfs  (rw,nosuid,nodev,noexec,relatime)
+tmpfs                            on  /dev/shm                         type  tmpfs       (rw,nosuid,nodev,seclabel)
+devpts                           on  /dev/pts                         type  devpts      (rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000)
+tmpfs                            on  /run                             type  tmpfs       (rw,nosuid,nodev,seclabel,mode=755)
+tmpfs                            on  /sys/fs/cgroup                   type  tmpfs       (ro,nosuid,nodev,noexec,seclabel,mode=755)
+cgroup                           on  /sys/fs/cgroup/systemd           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+pstore                           on  /sys/fs/pstore                   type  pstore      (rw,nosuid,nodev,noexec,relatime)
+cgroup                           on  /sys/fs/cgroup/cpuset            type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,cpuset)
+cgroup                           on  /sys/fs/cgroup/pids              type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,pids)
+cgroup                           on  /sys/fs/cgroup/net_cls,net_prio  type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,net_prio,net_cls)
+cgroup                           on  /sys/fs/cgroup/perf_event        type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,perf_event)
+cgroup                           on  /sys/fs/cgroup/cpu,cpuacct       type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,cpuacct,cpu)
+cgroup                           on  /sys/fs/cgroup/blkio             type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,blkio)
+cgroup                           on  /sys/fs/cgroup/devices           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,devices)
+cgroup                           on  /sys/fs/cgroup/freezer           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,freezer)
+cgroup                           on  /sys/fs/cgroup/memory            type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,memory)
+cgroup                           on  /sys/fs/cgroup/hugetlb           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,hugetlb)
+configfs                         on  /sys/kernel/config               type  configfs    (rw,relatime)
+/dev/mapper/VolGroup00-LogVol00  on  /                                type  xfs         (rw,relatime,seclabel,attr2,inode64,noquota)
+selinuxfs                        on  /sys/fs/selinux                  type  selinuxfs   (rw,relatime)
+systemd-1                        on  /proc/sys/fs/binfmt_misc         type  autofs      (rw,relatime,fd=33,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=12122)
+mqueue                           on  /dev/mqueue                      type  mqueue      (rw,relatime,seclabel)
+debugfs                          on  /sys/kernel/debug                type  debugfs     (rw,relatime)
+hugetlbfs                        on  /dev/hugepages                   type  hugetlbfs   (rw,relatime,seclabel)
+/dev/sda2                        on  /boot                            type  xfs         (rw,relatime,seclabel,attr2,inode64,noquota)
+sunrpc                           on  /var/lib/nfs/rpc_pipefs          type  rpc_pipefs  (rw,relatime)
+tmpfs                            on  /run/user/1000                   type  tmpfs       (rw,nosuid,nodev,relatime,seclabel,size=24140k,mode=700,uid=1000,gid=1000)
+/dev/mapper/vg_root-lv_root      on  /mnt                             type  xfs         (rw,relatime,seclabel,attr2,inode64,noquota)
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# ls - /dev/VolGroup00/LogVol00[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K- /dev/VolGroup00/LogVol00[1P/dev/VolGroup00/LogVol00[1P/dev/VolGroup00/LogVol00[1P/dev/VolGroup00/LogVol00[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /dev/VolGroup00/LogVol00[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+LogVol00  LogVol01  
+[root@lvm vagrant]# ls /dev/VolGroup00/LogVol0
+LogVol00  LogVol01  
+[root@lvm vagrant]# ls /dev/VolGroup00/LogVol00[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt[1P
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: level 0 dump of lvm:/
+xfsdump: dump date: Thu Feb 10 14:47:15 2022
+xfsdump: session id: ed864349-f702-4411-b771-159b4b1bc531
+xfsdump: session label: ""
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsrestore: searching media for dump
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 882864192 bytes
+xfsdump: creating dump Script started on Thu 10 Feb 2022 03:10:46 PM UTC
+]0;root@lvm:/home/vagrant[?1034h[root@lvm vagrant]# 
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# 
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  lvremove /dev/vg_root/lv_root[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
+  Logical volume "lv_root" successfully removed
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  vgremove /dev/vg_root[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+  Volume group "vg_root" successfully removed
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# pvremove /dev/sdbpvremove /dev/sdb[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+  Labels on physical volume "/dev/sdb" successfully wiped.
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# pvremove /dev/sdb[K lvcreate -n LogVol_Home -L 2G /dev/VolGroup00[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+  Logical volume "LogVol_Home" created.
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  mkfs.xfs /dev/VolGroup00/LogVol_Home[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+meta-data=/dev/VolGroup00/LogVol_Home isize=512    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  mount /dev/VolGroup00/LogVol_Home /mnt/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# cp -aR /home/* /mnt/
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# ls /mnt/
+[0m[38;5;27mvagrant[0m
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# rm -rf /home/*
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# umount /mnt
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  mount /dev/VolGroup00/LogVol_Home /home/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# touch /home/file{1..20}
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  lvcreate -L 100MB -s -n home_snap /dev/VolGroup00/LogVol_Home[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+  Rounding up size to full physical extent 128.00 MiB
+  Logical volume "home_snap" created.
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# rm -f /home/file{11..20}[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# umount /home
+]0;root@lvm:/home/vagrant[root@lvm vagrant]#  lvconvert --merge /dev/VolGroup00/home_snap[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+  Merging of volume VolGroup00/home_snap started.
+  VolGroup00/LogVol_Home: Merged: 100.00%
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# mount /home
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# df -h
+Filesystem                          Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00     8.0G  879M  7.2G  11% /
+devtmpfs                            110M     0  110M   0% /dev
+tmpfs                               118M     0  118M   0% /dev/shm
+tmpfs                               118M  4.5M  114M   4% /run
+tmpfs                               118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                          1014M   61M  954M   6% /boot
+/dev/mapper/vg_var-lv_var           922M  183M  676M  22% /var
+/dev/mapper/VolGroup00-LogVol_Home  2.0G   33M  2.0G   2% /home
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# mount | columt -t
+bash: columt: command not found
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# mount | columt -t[C[1P -tn -t
+sysfs                               on  /sys                             type  sysfs       (rw,nosuid,nodev,noexec,relatime,seclabel)
+proc                                on  /proc                            type  proc        (rw,nosuid,nodev,noexec,relatime)
+devtmpfs                            on  /dev                             type  devtmpfs    (rw,nosuid,seclabel,size=111876k,nr_inodes=27969,mode=755)
+securityfs                          on  /sys/kernel/security             type  securityfs  (rw,nosuid,nodev,noexec,relatime)
+tmpfs                               on  /dev/shm                         type  tmpfs       (rw,nosuid,nodev,seclabel)
+devpts                              on  /dev/pts                         type  devpts      (rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000)
+tmpfs                               on  /run                             type  tmpfs       (rw,nosuid,nodev,seclabel,mode=755)
+tmpfs                               on  /sys/fs/cgroup                   type  tmpfs       (ro,nosuid,nodev,noexec,seclabel,mode=755)
+cgroup                              on  /sys/fs/cgroup/systemd           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+pstore                              on  /sys/fs/pstore                   type  pstore      (rw,nosuid,nodev,noexec,relatime)
+cgroup                              on  /sys/fs/cgroup/net_cls,net_prio  type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,net_prio,net_cls)
+cgroup                              on  /sys/fs/cgroup/cpu,cpuacct       type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,cpuacct,cpu)
+cgroup                              on  /sys/fs/cgroup/freezer           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,freezer)
+cgroup                              on  /sys/fs/cgroup/hugetlb           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,hugetlb)
+cgroup                              on  /sys/fs/cgroup/pids              type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,pids)
+cgroup                              on  /sys/fs/cgroup/perf_event        type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,perf_event)
+cgroup                              on  /sys/fs/cgroup/cpuset            type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,cpuset)
+cgroup                              on  /sys/fs/cgroup/memory            type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,memory)
+cgroup                              on  /sys/fs/cgroup/devices           type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,devices)
+cgroup                              on  /sys/fs/cgroup/blkio             type  cgroup      (rw,nosuid,nodev,noexec,relatime,seclabel,blkio)
+configfs                            on  /sys/kernel/config               type  configfs    (rw,relatime)
+/dev/mapper/VolGroup00-LogVol00     on  /                                type  xfs         (rw,relatime,seclabel,attr2,inode64,noquota)
+selinuxfs                           on  /sys/fs/selinux                  type  selinuxfs   (rw,relatime)
+systemd-1                           on  /proc/sys/fs/binfmt_misc         type  autofs      (rw,relatime,fd=33,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11970)
+hugetlbfs                           on  /dev/hugepages                   type  hugetlbfs   (rw,relatime,seclabel)
+mqueue                              on  /dev/mqueue                      type  mqueue      (rw,relatime,seclabel)
+debugfs                             on  /sys/kernel/debug                type  debugfs     (rw,relatime)
+/dev/sda2                           on  /boot                            type  xfs         (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/mapper/vg_var-lv_var           on  /var                             type  ext4        (rw,relatime,seclabel,data=ordered)
+sunrpc                              on  /var/lib/nfs/rpc_pipefs          type  rpc_pipefs  (rw,relatime)
+/dev/mapper/VolGroup00-LogVol_Home  on  /home                            type  xfs         (rw,relatime,seclabel,attr2,inode64,noquota)
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# exit
+
+[root@lvm vagrant]# df -h
+Filesystem                          Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00     8.0G  879M  7.2G  11% /
+devtmpfs                            110M     0  110M   0% /dev
+tmpfs                               118M     0  118M   0% /dev/shm
+tmpfs                               118M  4.5M  114M   4% /run
+tmpfs                               118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                          1014M   61M  954M   6% /boot
+/dev/mapper/vg_var-lv_var           922M  183M  676M  22% /var
+/dev/mapper/VolGroup00-LogVol_Home  2.0G   33M  2.0G   2% /home
+
+Script done on Thu 10 Feb 2022 03:17:17 PM UTC
