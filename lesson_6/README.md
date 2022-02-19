@@ -8,3 +8,8 @@
 - создать свой репо и разместить там свой RPM;
 - реализовать это все либо в вагранте, либо развернуть у себя через nginx и дать ссылку на репо.
 
+## Для проверики домашнего задания:
+- curl -a http://localhost/repo/
+- yum repolist enabled | grep otus
+- yum list | grep otus
+- yum install percona-release -y

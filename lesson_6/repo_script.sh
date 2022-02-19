@@ -17,7 +17,7 @@ mkdir /usr/share/nginx/html/repo
 cp rpmbuild/RPMS/x86_64/nginx-1.14.1-1.el7_4.ngx.x86_64.rpm /usr/share/nginx/html/repo/
 wget https://repo.percona.com/yum/release/7/RPMS/noarch/percona-release-1.0-22.noarch.rpm -P /usr/share/nginx/html/repo/
 createrepo /usr/share/nginx/html/repo/
-cat >> /etc/nginx/conf.d/default.conf << EOF
+cat > /etc/nginx/conf.d/default.conf << EOF
 server {
     listen       80;
     server_name  localhost;
