@@ -17,3 +17,66 @@
 - реализовать выбранное решение и продемонстрировать его работоспособность. К сдаче:
 - README с анализом причины неработоспособности, возможными способами решения и обоснованием выбора одного из них;
 - исправленный стенд или демонстрация работоспособной системы скриншотами и описанием.
+
+### Запустить nginx на нестандартном порту 3-мя разными способами:
+
+1. Разрешим в SELinux работу nginx на порту TCP 4881 c помощью переключателей setsebool
+
+Находим в логах (/var/log/audit/audit.log) информацию о блокировании порта и Копируем время, в которое был записан этот лог, и, с помощью утилиты `audit2why` смотрим информации о запрете:
+```sh
+grep 1636489992.273:967 /var/log/audit/audit.log | audit2why
+```
+Утилита `audit2why` покажет почему трафик блокируется.Включим параметр `nis_enabled` и перезапустим nginx:
+```sh
+setsebool -P nis_enabled on
+systemctl restart nginx
+systemctl status nginx
+```
+Проверить статус параметра можно с помощью команды:
+```sh
+getsebool -a | grep nis_enabled
+```
+Отключить:
+```sh
+setsebool -P nis_enabled off
+```
+
+2. Разрешим в SELinux работу nginx на порту TCP 4881 c помощью добавления нестандартного порта в имеющийся тип
+Поиск имеющегося типа, для http трафика: 
+```sh
+semanage port -l | grep http
+```
+Добавим порт в тип `http_port_t`:
+```sh
+semanage port -a -t http_port_t -p tcp 4881
+systemctl restart nginx
+systemctl status nginx
+```
+Удалить нестандартный порт из имеющегося типа можно с помощью команды:
+```sh
+semanage port -d -t http_port_t -p tcp 4881
+```
+
+3. Разрешим в SELinux работу nginx на порту TCP 4881 c помощью формирования и установки модуля SELinux:
+Посмотрим логи SELinux, которые относятся к nginx:
+```sh
+grep nginx /var/log/audit/audit.log
+```
+Воспользуемся утилитой audit2allow для того, чтобы на основе логов SELinux сделать модуль, разрешающий работу nginx на нестандартном порту:
+```sh
+grep nginx /var/log/audit/audit.log | audit2allow -M nginx
+```
+Audit2allow сформировал модуль, и сообщил нам команду, с помощью которой можно применить данный модуль:
+```sh
+semodule -i nginx.pp
+systemctl start nginx
+systemctl status nginx
+```
+Просмотр всех установленных модулей: 
+```sh
+semodule -l
+```
+Удаления модуля:
+```sh
+semodule -r nginx
+```
