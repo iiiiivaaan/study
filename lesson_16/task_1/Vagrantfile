@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+MACHINES = {
+  :host01 => {
+    :box_name => "centos/7",
+    :box_version => "2004.01",
+    #:provision => "test.sh",
+  },
+}
+
+Vagrant.configure("2") do |config|
+  MACHINES.each do |boxname, boxconfig|
+    config.vm.define boxname do |box|
+      box.vm.box = boxconfig[:box_name]
+      box.vm.box_version = boxconfig[:box_version]
+      box.vm.host_name = "host01"
+      box.vm.network "forwarded_port", guest: 22, host: 222
+      box.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "1024"]
+        needsController = false
+      box.vm.provision "shell", path: "script.sh"
+      end
+    end
+  end
+end
