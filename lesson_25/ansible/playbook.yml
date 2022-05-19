@@ -1,0 +1,71 @@
+---
+
+- hosts: inetRouter
+  become: true
+  tasks:
+
+  - name: install packages
+    yum:
+      name: epel-release
+      state: present
+
+  - name: install packages
+    yum:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - iptables
+      - iptables-services
+
+  - name: Copy file iptables
+    ansible.builtin.copy:
+      src: files/iptables
+      dest: /etc/sysconfig/iptables
+      owner: root
+      group: root
+      mode: '0600'
+
+  - name: Make sure a service unit is running
+    ansible.builtin.systemd:
+      state: restarted
+      enabled: yes
+      name: iptables
+
+- hosts: inetRouter centralRouter office1Router office2Router
+  become: true
+  tasks:
+
+  - name: set up forward packages across routers 
+    sysctl:
+      name: net.ipv4.conf.all.forwarding
+      value: '1'
+      state: present
+
+- hosts: centralRouter centralServer
+  become: true
+  tasks:
+
+  - name: disable default route 
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: DEFROUTE=no
+
+- hosts: centralRouter 
+  become: true
+  tasks:
+
+  - name: add default gateway for centralRouter
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth1
+      line: GATEWAY=192.168.255.1
+
+- hosts: centralServer
+  become: true
+  tasks:
+
+  - name: add default gateway for centralServer
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth1
+      line: GATEWAY=192.168.0.1
+
