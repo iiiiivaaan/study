@@ -1,0 +1,129 @@
+---
+
+- hosts: server
+  become: true
+  tasks:
+
+  - name: Remove symlink
+    ansible.builtin.file:
+      path: /etc/localtime
+      state: absent
+  
+  - name: Create a symbolic link
+    ansible.builtin.file:
+      src: /usr/share/zoneinfo/Europe/Moscow
+      dest: /etc/localtime
+      owner: root
+      group: root
+      state: link
+
+  - name: Restart service chronyd.service
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: chronyd
+
+  - name: install packages
+    yum:
+      name: epel-release
+      state: present
+
+  - name: install packages 
+    yum:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - borgbackup
+      - vim
+      - sshpass
+
+  - name: Add the user 'borg' 
+    ansible.builtin.user:
+      name: borg
+      shell: /bin/bash
+      password: '$6$s7KSB6TPyjYZmV89$EkjGz.DIwwSN6jTZPjSJ1cutyrPalxWBEQ05dkSLaeWwrImRZH.cEvFvgn2Djyoj1wI5yGJiv6zwybEyQDI7u0'
+
+  - name: Create a directory /var/backup
+    ansible.builtin.file:
+      path: /var/backup
+      state: directory
+      owner: borg
+      group: borg
+      mode: '0755'
+
+- hosts: client
+  become: true
+  tasks:
+
+  - name: Remove symlink
+    ansible.builtin.file:
+      path: /etc/localtime
+      state: absent
+  
+  - name: Create a symbolic link
+    ansible.builtin.file:
+      src: /usr/share/zoneinfo/Europe/Moscow
+      dest: /etc/localtime
+      owner: root
+      group: root
+      state: link
+
+  - name: Restart service chronyd.service
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: chronyd
+
+  - name: install packages
+    yum:
+      name: epel-release
+      state: present
+
+  - name: install packages 
+    yum:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - borgbackup
+      - vim
+      - sshpass
+
+  - name: Add the user 'borg' 
+    ansible.builtin.user:
+      name: borg
+      shell: /bin/bash
+      password: '$6$s7KSB6TPyjYZmV89$EkjGz.DIwwSN6jTZPjSJ1cutyrPalxWBEQ05dkSLaeWwrImRZH.cEvFvgn2Djyoj1wI5yGJiv6zwybEyQDI7u0'
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+
+  - name: Copy systemd service
+    ansible.builtin.copy:
+      src: files/borg-backup.service
+      dest: /etc/systemd/system/borg-backup.service
+      owner: root
+      group: root
+      mode: '0644'
+  
+  - name: Copy systemd timer
+    ansible.builtin.copy:
+      src: files/borg-backup.timer
+      dest: /etc/systemd/system/borg-backup.timer
+      owner: root
+      group: root
+      mode: '0644'
+  
+  - name: Restart service borg
+    ansible.builtin.systemd:
+      enabled: yes
+      name: borg-backup.service
+  
+  - name: Enable a timer unit for borg
+    ansible.builtin.systemd:
+      name: borg-backup.timer
+      state: started
+      enabled: yes
+      daemon_reload: yes
+

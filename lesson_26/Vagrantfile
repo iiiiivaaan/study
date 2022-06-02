@@ -1,0 +1,49 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+################
+# RUN:
+# VAGRANT_EXPERIMENTAL=disks vagrant up
+################
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+
+  config.vm.provider "virtualbox" do |v|
+	  v.memory = 256
+  end
+
+  config.vm.define "server" do |server|
+    server.vm.disk :disk, size: "2GB", name: "extra_storage"
+    server.vm.network "private_network", ip: "192.168.11.160", virtualbox__intnet: "net"
+    server.vm.hostname = "server"
+    server.vm.provision "shell", inline: <<-SHELL
+       echo '/dev/sdb1    /var    xfs    defaults    0    0' >> /etc/fstab
+       echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/sdb
+       mkfs.xfs /dev/sdb1
+       mount /dev/sdb1 /mnt
+       cp -a /var/* /mnt
+       sed -i 's/^PasswordAuthentication.*$/PasswordAuthentication yes/' /etc/ssh/sshd_config && systemctl restart sshd.service
+       reboot
+    SHELL
+  end
+
+  config.vm.define "client" do |client|
+    client.vm.network "private_network", ip: "192.168.11.150", virtualbox__intnet: "net"
+    client.vm.hostname = "client"
+    client.vm.provision "shell", inline: <<-SHELL
+       echo 'Qwerty123' > /tmp/file
+       su - borg -c "sshpass -f /tmp/file ssh-copy-id -f -o StrictHostKeyChecking=no borg@192.168.11.160"
+       sed -i 's/^PasswordAuthentication.*$/PasswordAuthentication yes/' /etc/ssh/sshd_config && systemctl restart sshd.service
+       su - borg -c "borg init --encryption=none borg@192.168.11.160:/var/backup/"
+    SHELL
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible/playbook.yml"
+    ansible.host_key_checking = "false"
+    ansible.become = "true"
+    ansible.limit = "all"
+  end
+
+end
