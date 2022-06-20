@@ -1,0 +1,9 @@
+---
+- name: Start setting OSPF-quagga
+  hosts: routers
+  become: true
+  gather_facts: true
+
+  roles:
+  - default
+...

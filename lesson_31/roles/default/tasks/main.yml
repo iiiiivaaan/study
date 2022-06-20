@@ -1,0 +1,102 @@
+---
+
+- name: Enable forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+   
+- sysctl:
+    name: net.ipv4.conf.all.forwarding
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- sysctl:
+    name: net.ipv4.conf.all.rp_filter
+    value: 0
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: base packages install 
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - libsemanage-python
+    - traceroute
+    - tcpdump
+
+- name: Install quagga
+  yum:
+    name: quagga
+    state: latest
+
+- name: Copy config files on router1
+  block:
+    - name: Copy configuration files on router1 
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+           - { src: 'ospfd_router1.conf', dest: '/etc/quagga/ospfd.conf' }
+
+  when: ansible_hostname == "router1"
+   
+- name: Copy config files on router2
+  block:
+    - name: Copy configuration files on router2
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+           - { src: 'ospfd_router2.conf', dest: '/etc/quagga/ospfd.conf' }
+
+  when: ansible_hostname == "router2" 
+
+- name: Copy config files on router3
+  block:
+    - name: Copy configuration files on router3
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+           - { src: 'ospfd_router3.conf', dest: '/etc/quagga/ospfd.conf' }
+
+  when: ansible_hostname == "router3"
+
+- name: change file ownership ospfd.conf
+  file:
+     path: /etc/quagga/ospfd.conf
+     owner: quagga
+     group: quagga
+    
+- name: change file ownership zebra.conf
+  file:
+     path: /etc/quagga/zebra.conf
+     owner: quagga
+     group: quagga
+     
+- name: selinux zebra_write_config - allow to modify files 
+  seboolean:
+    name: zebra_write_config
+    persistent: yes
+    state: yes
+    
+- name: Start and Enable zebra 
+  service:
+    name: zebra
+    state: started
+    enabled: True
+
+- name: Start and Enable ospfd 
+  service:
+    name: ospfd
+    state: started
+    enabled: True
+
+- name: Restart network
+  service:
+    name: network
+    state: restarted
+
+...

@@ -1,0 +1,26 @@
+- name: Start setting OSPF-quagga asymmentrical routes
+  hosts: router1
+  become: true
+  gather_facts: true
+  
+  tasks:
+    - name: copy conf file ospfd.conf with "cost 1000"
+      block:
+        - name: Copy configuration files on router1 (cost changed)
+          copy: src={{ item.src }} dest={{ item.dest }}
+          with_items:
+              - { src: 'ospfd_router1_a.conf', dest: '/etc/quagga/ospfd.conf' }
+       
+    - name: change file ownership ospfd.conf
+      file:
+        path: /etc/quagga/ospfd.conf
+        owner: quagga
+        group: quagga
+
+    - name: Restart service ospfd
+      service:
+        name: ospfd
+        state: restarted
+
+  
+...
