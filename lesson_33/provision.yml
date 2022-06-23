@@ -1,0 +1,30 @@
+---
+- hosts: tap1
+  become: yes
+  roles:
+   - tap1
+
+- hosts: tap2 
+  become: yes
+  roles:
+   - tap2
+
+- hosts: tun1
+  become: yes
+  roles:
+   - tun1
+
+- hosts: tun2 
+  become: yes
+  roles:
+   - tun2
+
+- hosts: ovpnserver
+  become: yes
+  roles:
+   - ovpnserver
+
+- hosts: ovpnclient 
+  become: yes
+  roles:
+   - ovpnclient

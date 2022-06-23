@@ -1,0 +1,42 @@
+---
+- name: install epel-release
+  yum:
+    name: 
+      - epel-release
+    state: present
+    
+- name: install packages
+  yum:
+    name: 
+      - openvpn
+      - policycoreutils-python
+      - iperf3
+    state: present
+
+- name: Change the openvpn_t server to permissive
+  selinux_permissive:
+    name: openvpn_t
+    permissive: true
+
+- name: Copy static.key
+  copy:
+    src: static.key
+    dest: /etc/openvpn/static.key
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy client.conf
+  copy:
+    src: client.conf
+    dest: /etc/openvpn/client.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start openvpn service
+  systemd:
+    name: openvpn@client
+    enabled: true
+  notify: restart_openvpn 
+...
