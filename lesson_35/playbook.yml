@@ -1,0 +1,135 @@
+---
+- hosts: inetrouter
+  become: yes
+  tasks:
+
+  - name: set forwarding ip
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: 1
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: all disable ipv6
+    sysctl:
+      name: net.ipv6.conf.all.disable_ipv6
+      value: 1
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: disable default ipv6
+    sysctl:
+      name: net.ipv6.conf.default.disable_ipv6
+      value: 1
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: set iptables masquerade on inetrouter
+    command: iptables -t nat -A POSTROUTING ! -o eth0 -j MASQUERADE 
+  - name: restart network 
+    service:
+      name: network
+      state: restarted
+  
+  - name: configure team connection and vlan in inetrouter
+    shell: |
+      nmcli con add type team con-name team0 ifname team0 config '{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+      nmcli con mod team0 ipv4.addresses 192.168.255.1/24
+      nmcli con mod team0 ipv4.method manual
+      nmcli con modify team0 +ipv4.routes "10.10.10.0/24 192.168.255.2"
+      nmcli con add type ethernet con-name Team0-port1 ifname eth1 master team0
+      nmcli con add type team-slave con-name Team0-port2 ifname eth2 master team0
+      nmcli connection up Team0-port1
+      nmcli connection up Team0-port2
+      nmcli connection up team0
+    
+- hosts: centralrouter
+  become: yes
+  tasks:
+  - name: set forwarding ip
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: 1
+      sysctl_set: yes
+      state: present
+      reload: yes      
+
+  - name: all disable ipv6
+    sysctl:
+      name: net.ipv6.conf.all.disable_ipv6
+      value: 1
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: disable default ipv6
+    sysctl:
+      name: net.ipv6.conf.default.disable_ipv6
+      value: 1
+      sysctl_set: yes
+      state: present
+      reload: yes
+ 
+  - name: restart network 
+    service:
+      name: network
+      state: restarted
+   
+  - name: configure team connection and vlan in centralrouter
+    shell: |
+      nmcli device modify eth0 ipv4.never-default yes
+      nmcli con add type team con-name team0 ifname team0 config '{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}' 
+      nmcli con mod team0 ipv4.addresses 192.168.255.2/24
+      nmcli con mod team0 ipv4.gateway 192.168.255.1
+      nmcli con mod team0 ipv4.method manual
+      nmcli con add type ethernet con-name Team0-port1 ifname eth1 master team0
+      nmcli con add type team-slave con-name Team0-port2 ifname eth2 master team0
+      nmcli connection up Team0-port1
+      nmcli connection up Team0-port2
+      nmcli connection up team0
+      nmcli con add type vlan ifname VLAN100 dev eth3 id 100 ip4 10.10.10.100/24
+      nmcli con add type vlan ifname VLAN101 dev eth3 id 101 ip4 10.10.10.101/24
+
+      
+- hosts: testserver1
+  become: yes
+  tasks:
+
+  - name: configure vlan 
+    shell: |
+      nmcli device modify eth0 ipv4.never-default yes
+      nmcli con add type vlan ifname VLAN100 dev eth1 id 100 ip4 10.10.10.254/24 gw4 10.10.10.100
+      
+- hosts: testserver2
+  become: yes
+  tasks:
+
+  - name: configure vlan 
+    shell: |
+      nmcli device modify eth0 ipv4.never-default yes
+      nmcli con add type vlan ifname VLAN101 dev eth1 id 101 ip4 10.10.10.254/24 gw4 10.10.10.101
+
+      
+- hosts: testclient1
+  become: yes
+  tasks:
+
+  - name: configure vlan 
+    shell: |
+      nmcli device modify eth0 ipv4.never-default yes
+      nmcli con add type vlan ifname VLAN100 dev eth1 id 100 ip4 10.10.10.1/24 gw4 10.10.10.100
+
+
+- hosts: testclient2
+  become: yes
+  tasks:
+
+  - name: configure vlan 
+    shell: |
+      nmcli device modify eth0 ipv4.never-default yes
+      nmcli con add type vlan ifname VLAN101 dev eth1 id 101 ip4 10.10.10.1/24 gw4 10.10.10.101
+
+...
