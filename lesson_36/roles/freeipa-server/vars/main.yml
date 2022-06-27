@@ -1,0 +1,7 @@
+domain: "otus.local"
+server: "ipaserver.otus.local"
+realm: "OTUS.LOCAL"
+admin: "admin"
+password: "12345678"
+dbpassword: "db12345678"
+

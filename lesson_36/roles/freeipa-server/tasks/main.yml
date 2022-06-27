@@ -1,0 +1,39 @@
+---
+ 
+ - name: install epel-release
+   yum: 
+     name: epel-release 
+     state: latest 
+
+ - name: install ipa-server
+   yum:
+     name: ipa-server 
+     state: latest 
+ 
+ - name: install ipa-server-dns
+   yum:
+     name: ipa-server-dns
+     state: latest
+ 
+ - name: install nss
+   yum:
+     name: nss*
+     state: latest
+
+ - name: Modification /etc/hosts
+   copy:
+     src: hosts
+     dest: /etc/
+
+ - name: dbus service restart
+   systemd:
+     name: dbus.service
+     state: restarted
+     enabled: yes
+
+ - name: IPA-Server install
+   ignore_errors: True
+   register: result
+   command: ipa-server-install --hostname={{ server }} --domain={{ domain }} --realm={{ realm }} --ds-password={{ dbpassword }} --admin-password={{ password }} --mkhomedir --setup-dns --forwarder=8.8.8.8 --auto-reverse --unattended
+   notify:
+     - restart freeipa

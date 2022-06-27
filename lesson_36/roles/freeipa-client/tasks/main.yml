@@ -1,0 +1,27 @@
+---
+
+- name: Set hostname
+  hostname: 
+    name: "ipaclient.otus.local"
+
+- name: Modification /etc/hosts
+  copy:
+    src: hosts
+    dest: /etc/
+
+- name: install FreeIPA-Client 
+  yum: 
+    name: "ipa-client" 
+    state: latest 
+    
+- name: resolv.conf configuring
+  lineinfile:
+    path: /etc/resolv.conf
+    line: "nameserver 192.168.1.101"
+
+- name: add client to domain
+  ignore_errors: True
+  register: result
+  command: ipa-client-install  --mkhomedir --server={{ server }} --domain={{ domain }}  --realm={{ realm }} --principal={{ admin }} --password={{ password }} --force-ntpd --unattended
+
+...

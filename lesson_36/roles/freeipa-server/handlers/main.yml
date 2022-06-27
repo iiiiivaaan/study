@@ -1,0 +1,8 @@
+---
+
+- name: restart freeipa
+  service:
+    name: ipa
+    state: restarted
+
+...
