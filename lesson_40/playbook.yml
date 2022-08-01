@@ -1,0 +1,39 @@
+---
+- name: Install docker docker-compose
+  hosts: docker
+  become: true
+  tasks:
+    
+    - name: Put SELinux in permissive mode
+      selinux:
+        policy: targeted
+        state: permissive
+    - name: install docker
+      yum:
+        name: docker
+        state: present
+    - name: docker is started and runs at startup
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    - name: install epel-release
+      yum:
+        name: epel-release
+        state: present
+    - name: install python-pip
+      yum:
+        name: 
+        - python-pip
+        - python-devel
+        - python3
+        - gcc
+        state: present
+    - name: Download docker
+      ansible.builtin.get_url:
+        url: https://github.com/docker/compose/releases/download/1.23.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: '0740'
+    - name: run docker-compose
+      ansible.builtin.shell: "/usr/local/bin/docker-compose -f /vagrant/docker-compose.yml up -d"
+
