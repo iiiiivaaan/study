@@ -1,0 +1,5 @@
+---
+
+mysql_password: "Pass!Mysql0"
+replication_user: "replicant"
+replication_password: "!replica0Mysql"
